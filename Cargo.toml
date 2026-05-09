@@ -1,0 +1,75 @@
+[package]
+name = "orbit-backend"
+version = "0.1.0"
+edition = "2021"
+authors = ["IoOrbit Team <team@orbit-app.io>"]
+description = "High-performance Rust backend for Orbit productivity app with Stellar integration"
+license = "MIT"
+repository = "https://github.com/IoOrbit/orbit-Backend"
+
+[dependencies]
+# Web framework
+axum = { version = "0.7", features = ["macros", "multipart"] }
+tower = { version = "0.4", features = ["full"] }
+tower-http = { version = "0.5", features = ["fs", "cors", "trace"] }
+hyper = { version = "1.0", features = ["full"] }
+
+# Async runtime
+tokio = { version = "1.0", features = ["full"] }
+
+# Database
+sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres", "uuid", "chrono", "migrate"] }
+redis = { version = "0.24", features = ["tokio-comp", "connection-manager"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Authentication & Security
+jsonwebtoken = "9.0"
+bcrypt = "0.15"
+oauth2 = "4.4"
+ring = "0.17"
+
+# UUID & Time
+uuid = { version = "1.0", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+
+# Stellar blockchain
+stellar-sdk = { version = "0.20", features = ["soroban"] }
+soroban-sdk = "20.0"
+
+# Validation
+validator = { version = "0.18", features = ["derive"] }
+
+# Logging & Tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Error handling
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Environment & Config
+dotenvy = "0.15"
+config = "0.14"
+
+# HTTP client
+reqwest = { version = "0.11", features = ["json"] }
+
+# Async utilities
+futures = "0.3"
+
+# Metrics
+metrics = "0.22"
+metrics-exporter-prometheus = "0.13"
+
+[dev-dependencies]
+mockall = "0.12"
+tempfile = "3.0"
+testcontainers = "0.15"
+
+[features]
+default = ["postgres"]
+postgres = []
+test-database = []
